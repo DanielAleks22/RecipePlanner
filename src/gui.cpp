@@ -5,7 +5,7 @@
 #include <QLineEdit>
 #include <iostream>
 
-Gui::Gui(QWidget *parent) : QWidget(parent) {
+Gui::Gui(AI* ai, QWidget *parent) : QWidget(parent), ai(ai) {
     QVBoxLayout *layout = new QVBoxLayout(this);
 
     QLabel *label = new QLabel("Enter Ingredients:", this);
@@ -19,8 +19,10 @@ Gui::Gui(QWidget *parent) : QWidget(parent) {
 
     setLayout(layout);
 
-    connect(button, &QPushButton::clicked, this, [input]() {
+    connect(button, &QPushButton::clicked, this, [this, ai, input]() {
         QString ingredients = input->text();
-        std::cout << "Ingredients: " << ingredients.toStdString() << std::endl;
+        std::string recipe = ai->getRecipeSuggestions(ingredients.toStdString());
+        std::cout << "Recipe suggestion: " << recipe << std::endl;
     });
+
 }

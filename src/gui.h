@@ -2,23 +2,16 @@
 #define GUI_H
 
 #include <QWidget>
+#include "ai.h"
 
 class Gui : public QWidget {
     Q_OBJECT
 
 public:
-    //the explicit protects from constructing using "new QWidget()"
-    //allows for parent child relationship (creating windows within other windows)
-    explicit Gui(QWidget *parent = nullptr); // Constructor
-
-signals:
-    // TODO
-
-public slots:
-    // TODO
+    explicit Gui(AI* ai, QWidget *parent = nullptr); // Constructor
 
 private:
-    // TODO
+    AI* ai; // Pointer to the AI instance
 };
 
 #endif // GUI_H
